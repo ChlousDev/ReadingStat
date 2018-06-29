@@ -10,9 +10,9 @@ namespace ReadingStat.Logic.Logic
 {
     public class ReadingAnalizer
     {
-        protected ReadintStatDataAccess dataAccess;
+        protected ReadingStatDataAccess dataAccess;
 
-        public ReadingAnalizer(ReadintStatDataAccess dataAccess)
+        public ReadingAnalizer(ReadingStatDataAccess dataAccess)
         {
             this.dataAccess = dataAccess;
         }

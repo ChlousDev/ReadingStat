@@ -12,7 +12,7 @@ namespace ReadingStat.Logic.Logic
     {
         private ELanguage language;
 
-        public LanguageReadingAnalizer(ReadintStatDataAccess dataAccess, ELanguage language): base(dataAccess)
+        public LanguageReadingAnalizer(ReadingStatDataAccess dataAccess, ELanguage language): base(dataAccess)
         {
             this.language = language;
         }

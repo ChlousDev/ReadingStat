@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\ReadintStatDataAccess.cs" />
+    <Compile Include="DataAccess\ReadingStatDataAccess.cs" />
     <Compile Include="Logic\LanguageReadingAnalizer.cs" />
     <Compile Include="Logic\ReadingAnalizer.cs" />
     <Compile Include="Model\Book.cs" />

@@ -5,8 +5,91 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReadingStat.UI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Lese Statistik" Height="650" Width="1200">
+
+    <Window.Resources>
+        <local:BookListViewModel x:Key="BookListViewModel"></local:BookListViewModel>
+        <local:StatisticsViewModel x:Key="StatisticsViewModel"></local:StatisticsViewModel>
+    </Window.Resources>
+
+    <Grid >
+        <TabControl>
+            <TabItem Header="Bücher" DataContext="{StaticResource BookListViewModel}">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
+                        <Button Margin="5,0,5,0">Hinzufügen</Button>
+                        <Button Margin="5,0,5,0">Löschen</Button>
+                    </StackPanel>
+                    <DataGrid ItemsSource="{Binding Books}" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Titel" Binding="{Binding Title}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Autor" Binding="{Binding Author}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Sprache" Binding="{Binding Language}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Begonnen" Binding="{Binding StartDate}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Ausgelesen" Binding="{Binding EndDate}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Anzahl Seiten" Binding="{Binding NumberOfPages}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Anzahl Tage" Binding="{Binding ReadingDays}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Seiten pro Tag" Binding="{Binding PagesReadPerDay}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,10,0,0">
+                        <Button Margin="5,0,5,0" Command="{Binding PreviousPageCommand}">Zurück</Button>
+                        <Button Margin="5,0,5,0" Command="{Binding NextPageCommand}">Weiter</Button>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Statistik" DataContext="{StaticResource StatisticsViewModel}">
+                <ItemsControl ItemsSource="{Binding Statistics}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel></WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Width="550" Margin="10" Padding="10" BorderBrush="DarkGray" BorderThickness="1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="200"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="35"></RowDefinition>
+                                        <RowDefinition Height="35"></RowDefinition>
+                                        <RowDefinition Height="35"></RowDefinition>
+                                        <RowDefinition Height="35"></RowDefinition>
+                                        <RowDefinition Height="35"></RowDefinition>
+                                        <RowDefinition Height="35"></RowDefinition>
+                                        <RowDefinition Height="35"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <TextBlock Text="{Binding Title}" FontWeight="Bold" Grid.Row="0" Grid.Column="0"></TextBlock>
+
+                                    <TextBlock Text="Anzahl Bücher" Grid.Row="1" Grid.Column="0"></TextBlock>
+                                    <TextBlock Text="{Binding ReadingStatistics.NumberOfBooks}" Grid.Row="1" Grid.Column="1"></TextBlock>
+
+                                    <TextBlock Text="Total Seiten" Grid.Row="2" Grid.Column="0"></TextBlock>
+                                    <TextBlock Text="{Binding ReadingStatistics.TotalPages}" Grid.Row="2" Grid.Column="1"></TextBlock>
+
+                                    <TextBlock Text="Total Lesetage" Grid.Row="3" Grid.Column="0"></TextBlock>
+                                    <TextBlock Text="{Binding ReadingStatistics.TotalReadingDays}" Grid.Row="3" Grid.Column="1"></TextBlock>
+
+                                    <TextBlock Text="Durchschnittliche Anzahl Seiten" Grid.Row="4" Grid.Column="0"></TextBlock>
+                                    <TextBlock Text="{Binding ReadingStatistics.AvaragePages}" Grid.Row="4" Grid.Column="1"></TextBlock>
+
+                                    <TextBlock Text="Durchschnittliche Lesetage" Grid.Row="5" Grid.Column="0"></TextBlock>
+                                    <TextBlock Text="{Binding ReadingStatistics.AvarageReadingDays}" Grid.Row="5" Grid.Column="1"></TextBlock>
+
+                                    <TextBlock Text="Gelesene Seiten pro Tag" Grid.Row="6" Grid.Column="0"></TextBlock>
+                                    <TextBlock Text="{Binding ReadingStatistics.PagesReadPerDay}" Grid.Row="6" Grid.Column="1"></TextBlock>
+
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Window>

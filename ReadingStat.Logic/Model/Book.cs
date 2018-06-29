@@ -41,7 +41,7 @@ namespace ReadingStat.Logic.Model
                 {
                     readingDays = (int)Math.Ceiling((this.EndDate - this.StartDate).TotalDays);
                 }
-                return ReadingDays;
+                return readingDays;
             }
         }
 

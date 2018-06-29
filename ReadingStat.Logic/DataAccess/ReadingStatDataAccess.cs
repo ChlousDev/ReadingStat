@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ReadingStat.Logic.DataAccess
 {
-    public class ReadintStatDataAccess
+    public class ReadingStatDataAccess
     {
         private static readonly List<Book> books = new List<Book>() {
             new Book()
@@ -89,7 +89,14 @@ namespace ReadingStat.Logic.DataAccess
 
         private IEnumerable<Book> GetBooksBase()
         {
-            return ReadintStatDataAccess.books.OrderBy(b => b.StartDate);
+            List<Book> books = new List<Book>();
+            books.AddRange(ReadingStatDataAccess.books);
+            //books.AddRange(ReadingStatDataAccess.books);
+            //books.AddRange(ReadingStatDataAccess.books);
+            //books.AddRange(ReadingStatDataAccess.books);
+            //books.AddRange(ReadingStatDataAccess.books);
+
+            return books.OrderByDescending(b => b.StartDate);
         }
     }
 }

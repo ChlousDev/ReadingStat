@@ -14,6 +14,32 @@ namespace ReadingStat.Logic.Model
 
         public int TotalPages { get; set; }
 
+        public double? AvaragePages
+        {
+            get
+            {
+                double? averagePages = null;
+                if (this.NumberOfBooks > 0)
+                {
+                    averagePages = Math.Round(this.TotalPages / (double)this.NumberOfBooks);
+                }
+                return averagePages;
+            }
+        }
+
+        public double? AvarageReadingDays
+        {
+            get
+            {
+                double? averageReadingDays = null;
+                if (this.NumberOfBooks > 0)
+                {
+                    averageReadingDays = Math.Round(this.TotalReadingDays / (double)this.NumberOfBooks);
+                }
+                return averageReadingDays;
+            }
+        }
+
         public double? PagesReadPerDay
         {
             get
