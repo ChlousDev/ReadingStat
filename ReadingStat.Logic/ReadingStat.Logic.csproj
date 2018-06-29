@@ -40,7 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\ReadintStatDataAccess.cs" />
+    <Compile Include="Logic\LanguageReadingAnalizer.cs" />
+    <Compile Include="Logic\ReadingAnalizer.cs" />
+    <Compile Include="Model\Book.cs" />
+    <Compile Include="Model\ELanguage.cs" />
+    <Compile Include="Model\ReadingStatistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
