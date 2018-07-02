@@ -110,5 +110,15 @@ namespace ReadingStat.Logic.DataAccess
 
             return books.OrderByDescending(b => b.StartDate);
         }
+
+        public void Remove(Book book)
+        {
+            ReadingStatDataAccess.books.Remove(book);
+        }
+
+        public void Add(Book book)
+        {
+            ReadingStatDataAccess.books.Add(book);
+        }
     }
 }

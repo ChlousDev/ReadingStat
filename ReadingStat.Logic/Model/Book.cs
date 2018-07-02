@@ -8,6 +8,9 @@ namespace ReadingStat.Logic.Model
 {
     public class Book
     {
+        //[Key]
+        public long ID { get; set; }
+
         public string Title { get; set; }
 
         public string Author { get; set; }
@@ -71,6 +74,8 @@ namespace ReadingStat.Logic.Model
                 return pagesReadPerDay;
             }
         }
+
+        public bool IsSelected { get; set; }
 
     }
 }
