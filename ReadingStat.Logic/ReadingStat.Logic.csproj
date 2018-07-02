@@ -43,8 +43,10 @@
     <Compile Include="DataAccess\ReadingStatDataAccess.cs" />
     <Compile Include="Logic\LanguageReadingAnalizer.cs" />
     <Compile Include="Logic\ReadingAnalizer.cs" />
+    <Compile Include="Logic\TypeReadingAnalizer.cs" />
     <Compile Include="Model\Book.cs" />
     <Compile Include="Model\ELanguage.cs" />
+    <Compile Include="Model\EType.cs" />
     <Compile Include="Model\ReadingStatistics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

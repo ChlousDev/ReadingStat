@@ -26,6 +26,20 @@ namespace ReadingStat.Logic.Model
             }
         }
 
+        public string TypeString { get; set; }
+
+        public EType Type
+        {
+            get
+            {
+                return (EType)Enum.Parse(typeof(EType), this.TypeString);
+            }
+            set
+            {
+                this.TypeString = value.ToString();
+            }
+        }
+
         public int NumberOfPages { get; set; }
 
         public DateTime StartDate { get; set; }

@@ -57,6 +57,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\LanguageConverter.cs" />
+    <Compile Include="Converters\TypeConverter.cs" />
+    <Compile Include="Converters\DateConverter.cs" />
     <Compile Include="StatisticsItemViewModel.cs" />
     <Compile Include="StatisticsViewModel.cs" />
     <Page Include="MainWindow.xaml">

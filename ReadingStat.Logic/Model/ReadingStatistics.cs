@@ -21,7 +21,7 @@ namespace ReadingStat.Logic.Model
                 double? averagePages = null;
                 if (this.NumberOfBooks > 0)
                 {
-                    averagePages = Math.Round(this.TotalPages / (double)this.NumberOfBooks);
+                    averagePages = Math.Round(this.TotalPages / (double)this.NumberOfBooks, 2, MidpointRounding.AwayFromZero);
                 }
                 return averagePages;
             }
@@ -34,7 +34,7 @@ namespace ReadingStat.Logic.Model
                 double? averageReadingDays = null;
                 if (this.NumberOfBooks > 0)
                 {
-                    averageReadingDays = Math.Round(this.TotalReadingDays / (double)this.NumberOfBooks);
+                    averageReadingDays = Math.Round(this.TotalReadingDays / (double)this.NumberOfBooks, 2, MidpointRounding.AwayFromZero);
                 }
                 return averageReadingDays;
             }
@@ -47,7 +47,7 @@ namespace ReadingStat.Logic.Model
                 double? pagesReadPerDay = null;
                 if (this.TotalReadingDays > 0)
                 {
-                    pagesReadPerDay = Math.Round(this.TotalPages / (double)this.TotalReadingDays);
+                    pagesReadPerDay = Math.Round(this.TotalPages / (double)this.TotalReadingDays, 2, MidpointRounding.AwayFromZero);
                 }
                 return pagesReadPerDay;
             }

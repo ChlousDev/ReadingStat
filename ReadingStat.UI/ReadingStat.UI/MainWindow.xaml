@@ -4,12 +4,17 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ReadingStat.UI"
+        xmlns:converters="clr-namespace:ReadingStat.UI.Converters"
         mc:Ignorable="d"
         Title="Lese Statistik" Height="650" Width="1200">
 
     <Window.Resources>
         <local:BookListViewModel x:Key="BookListViewModel"></local:BookListViewModel>
         <local:StatisticsViewModel x:Key="StatisticsViewModel"></local:StatisticsViewModel>
+
+        <converters:DateConverter x:Key="DateConverter"></converters:DateConverter>
+        <converters:TypeConverter x:Key="TypeConverter"></converters:TypeConverter>
+        <converters:LanguageConverter x:Key="LanguageConverter"></converters:LanguageConverter>
     </Window.Resources>
 
     <Grid >
@@ -24,12 +29,13 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Titel" Binding="{Binding Title}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Autor" Binding="{Binding Author}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Sprache" Binding="{Binding Language}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Begonnen" Binding="{Binding StartDate}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Ausgelesen" Binding="{Binding EndDate}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Anzahl Seiten" Binding="{Binding NumberOfPages}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Anzahl Tage" Binding="{Binding ReadingDays}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Seiten pro Tag" Binding="{Binding PagesReadPerDay}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Sprache" Binding="{Binding Language, Converter={StaticResource LanguageConverter} }"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Typ" Binding="{Binding Type, Converter={StaticResource TypeConverter} }"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Begonnen" Binding="{Binding StartDate, Converter={StaticResource DateConverter} }"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Ausgelesen" Binding="{Binding EndDate, Converter={StaticResource DateConverter} }"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Anzahl Seiten" Binding="{Binding NumberOfPages, StringFormat=N0}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Anzahl Tage" Binding="{Binding ReadingDays, StringFormat=N0}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Seiten pro Tag" Binding="{Binding PagesReadPerDay, StringFormat=N2}"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Margin="0,10,0,0">
@@ -47,7 +53,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Width="550" Margin="10" Padding="10" BorderBrush="DarkGray" BorderThickness="1">
+                            <Border Width="370" Margin="10" Padding="10" BorderBrush="DarkGray" BorderThickness="1">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="200"></ColumnDefinition>
@@ -66,22 +72,22 @@
                                     <TextBlock Text="{Binding Title}" FontWeight="Bold" Grid.Row="0" Grid.Column="0"></TextBlock>
 
                                     <TextBlock Text="Anzahl Bücher" Grid.Row="1" Grid.Column="0"></TextBlock>
-                                    <TextBlock Text="{Binding ReadingStatistics.NumberOfBooks}" Grid.Row="1" Grid.Column="1"></TextBlock>
+                                    <TextBlock Text="{Binding ReadingStatistics.NumberOfBooks, StringFormat=N0}" Grid.Row="1" Grid.Column="1"></TextBlock>
 
                                     <TextBlock Text="Total Seiten" Grid.Row="2" Grid.Column="0"></TextBlock>
-                                    <TextBlock Text="{Binding ReadingStatistics.TotalPages}" Grid.Row="2" Grid.Column="1"></TextBlock>
+                                    <TextBlock Text="{Binding ReadingStatistics.TotalPages, StringFormat=N0}" Grid.Row="2" Grid.Column="1"></TextBlock>
 
                                     <TextBlock Text="Total Lesetage" Grid.Row="3" Grid.Column="0"></TextBlock>
-                                    <TextBlock Text="{Binding ReadingStatistics.TotalReadingDays}" Grid.Row="3" Grid.Column="1"></TextBlock>
+                                    <TextBlock Text="{Binding ReadingStatistics.TotalReadingDays, StringFormat=N0}" Grid.Row="3" Grid.Column="1"></TextBlock>
 
                                     <TextBlock Text="Durchschnittliche Anzahl Seiten" Grid.Row="4" Grid.Column="0"></TextBlock>
-                                    <TextBlock Text="{Binding ReadingStatistics.AvaragePages}" Grid.Row="4" Grid.Column="1"></TextBlock>
+                                    <TextBlock Text="{Binding ReadingStatistics.AvaragePages, StringFormat=N2}" Grid.Row="4" Grid.Column="1"></TextBlock>
 
                                     <TextBlock Text="Durchschnittliche Lesetage" Grid.Row="5" Grid.Column="0"></TextBlock>
-                                    <TextBlock Text="{Binding ReadingStatistics.AvarageReadingDays}" Grid.Row="5" Grid.Column="1"></TextBlock>
+                                    <TextBlock Text="{Binding ReadingStatistics.AvarageReadingDays, StringFormat=N2}" Grid.Row="5" Grid.Column="1"></TextBlock>
 
                                     <TextBlock Text="Gelesene Seiten pro Tag" Grid.Row="6" Grid.Column="0"></TextBlock>
-                                    <TextBlock Text="{Binding ReadingStatistics.PagesReadPerDay}" Grid.Row="6" Grid.Column="1"></TextBlock>
+                                    <TextBlock Text="{Binding ReadingStatistics.PagesReadPerDay, StringFormat=N2}" Grid.Row="6" Grid.Column="1"></TextBlock>
 
                                 </Grid>
                             </Border>

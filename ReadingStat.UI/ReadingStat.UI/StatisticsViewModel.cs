@@ -41,6 +41,12 @@ namespace ReadingStat.UI
 
             LanguageReadingAnalizer englishReadingAnalizer = new LanguageReadingAnalizer(dataAccess, ELanguage.English);
             this.Statistics.Add(new StatisticsItemViewModel("Englische Bücher", englishReadingAnalizer.Analize()));
+
+            TypeReadingAnalizer entertainmentReadingAnalizer = new TypeReadingAnalizer(dataAccess, EType.Entertainment);
+            this.Statistics.Add(new StatisticsItemViewModel("Unterhaltung", entertainmentReadingAnalizer.Analize()));
+
+            TypeReadingAnalizer literatureReadingAnalizer = new TypeReadingAnalizer(dataAccess, EType.Literature);
+            this.Statistics.Add(new StatisticsItemViewModel("Literatur", literatureReadingAnalizer.Analize()));
         }
 
         #region Property Changed

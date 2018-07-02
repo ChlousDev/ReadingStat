@@ -17,6 +17,7 @@ namespace ReadingStat.Logic.DataAccess
                  StartDate = new DateTime(2018,6,1),
                  EndDate = new DateTime(2018,8,1),
                   Language = ELanguage.English,
+                  Type = EType.Literature,
                    NumberOfPages = 592,
             },
             new Book()
@@ -26,6 +27,7 @@ namespace ReadingStat.Logic.DataAccess
                  StartDate = new DateTime(2018,5,1),
                  EndDate = new DateTime(2018,6,1),
                   Language = ELanguage.German,
+                   Type = EType.Entertainment,
                    NumberOfPages = 976,
             },
             new Book()
@@ -35,6 +37,7 @@ namespace ReadingStat.Logic.DataAccess
                  StartDate = new DateTime(2018,8,1),
                 // EndDate = new DateTime(2018,8,1),
                   Language = ELanguage.German,
+                   Type = EType.Entertainment,
                    NumberOfPages = 470,
             },
             new Book()
@@ -44,6 +47,7 @@ namespace ReadingStat.Logic.DataAccess
                  StartDate = new DateTime(2018,4,1),
                  EndDate = new DateTime(2018,5,1),
                   Language = ELanguage.German,
+                   Type = EType.Entertainment,
                    NumberOfPages = 389,
             },
             new Book()
@@ -53,6 +57,7 @@ namespace ReadingStat.Logic.DataAccess
                  //StartDate = new DateTime(2018,6,1),
                  //EndDate = new DateTime(2018,8,1),
                   Language = ELanguage.German,
+                   Type = EType.Entertainment,
                    NumberOfPages = 950,
             },
             new Book()
@@ -62,6 +67,7 @@ namespace ReadingStat.Logic.DataAccess
                  StartDate = new DateTime(2018,3,1),
                  EndDate = new DateTime(2018,4,1),
                   Language = ELanguage.English,
+                   Type = EType.Literature,
                    NumberOfPages = 241,
             },
         };
@@ -80,6 +86,12 @@ namespace ReadingStat.Logic.DataAccess
         {
             string languageString = language.ToString();
             return this.GetFinishedBooksBase().Where(l => l.LanguageString == languageString).ToList();
+        }
+
+        public List<Book> GetFinishedBooks(EType type)
+        {
+            string typeString = type.ToString();
+            return this.GetFinishedBooksBase().Where(l => l.TypeString == typeString).ToList();
         }
 
         private IEnumerable<Book> GetFinishedBooksBase()
