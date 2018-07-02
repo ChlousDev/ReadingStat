@@ -70,7 +70,7 @@ namespace ReadingStat.UI
             if (save == true)
             {
                 ReadingStatDataAccess dataAccess = new ReadingStatDataAccess();
-                dataAccess.Add(book);
+                dataAccess.AddBook(book);
                 this.Load(this.currentPage);
             }
         }
@@ -86,7 +86,7 @@ namespace ReadingStat.UI
                 if (save == true)
                 {
                     ReadingStatDataAccess dataAccess = new ReadingStatDataAccess();
-                    dataAccess.Add(book);
+                    dataAccess.UpdateBook(book);
                     this.Load(this.currentPage);
                 }
             }
@@ -97,7 +97,7 @@ namespace ReadingStat.UI
             ReadingStatDataAccess dataAccess = new ReadingStatDataAccess();
             foreach (Book book in this.Books.Where(b => b.IsSelected))
             {
-                dataAccess.Remove(book);
+                dataAccess.RemoveBook(book);
             }
             this.Load(this.currentPage);
         }
