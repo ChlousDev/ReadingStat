@@ -1,6 +1,10 @@
-﻿using ReadingStat.Logic.Model;
+﻿
+using ReadingStat.Logic.Model;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,68 +13,14 @@ namespace ReadingStat.Logic.DataAccess
 {
     public class ReadingStatDataAccess
     {
-        private static readonly List<Book> books = new List<Book>() {
-            new Book()
-            {
-                Title="Moby Dick Or: The Wahle",
-                Author="Herman Melville",
-                 StartDate = new DateTime(2018,6,1),
-                 EndDate = new DateTime(2018,8,1),
-                  Language = ELanguage.English,
-                  Type = EType.Literature,
-                   NumberOfPages = 592,
-            },
-            new Book()
-            {
-                Title="Elfenlicht",
-                Author="Bernhard Hennen",
-                 StartDate = new DateTime(2018,5,1),
-                 EndDate = new DateTime(2018,6,1),
-                  Language = ELanguage.German,
-                   Type = EType.Entertainment,
-                   NumberOfPages = 976,
-            },
-            new Book()
-            {
-                Title="Honors Mission",
-                Author="David Weber",
-                 StartDate = new DateTime(2018,8,1),
-                // EndDate = new DateTime(2018,8,1),
-                  Language = ELanguage.German,
-                   Type = EType.Entertainment,
-                   NumberOfPages = 470,
-            },
-            new Book()
-            {
-                Title="Der letzte Befehl",
-                Author="Honor Harrington",
-                 StartDate = new DateTime(2018,4,1),
-                 EndDate = new DateTime(2018,5,1),
-                  Language = ELanguage.German,
-                   Type = EType.Entertainment,
-                   NumberOfPages = 389,
-            },
-            new Book()
-            {
-                Title="Elfenkönigin",
-                Author="Bernhard Hennen",
-                 //StartDate = new DateTime(2018,6,1),
-                 //EndDate = new DateTime(2018,8,1),
-                  Language = ELanguage.German,
-                   Type = EType.Entertainment,
-                   NumberOfPages = 950,
-            },
-            new Book()
-            {
-                Title="I, Robot",
-                Author="Isaac Asimov",
-                 StartDate = new DateTime(2018,3,1),
-                 EndDate = new DateTime(2018,4,1),
-                  Language = ELanguage.English,
-                   Type = EType.Literature,
-                   NumberOfPages = 241,
-            },
-        };
+        ReadingStatisticsContext dbContext;
+        public static String Password { get; set; }
+
+        public ReadingStatDataAccess()
+        {
+            dbContext = new ReadingStatisticsContext(ReadingStatDataAccess.Password);
+            this.dbContext.Books.ToList();
+        }
 
         public List<Book> GetBooks(int page, int pageSize)
         {
@@ -101,29 +51,24 @@ namespace ReadingStat.Logic.DataAccess
 
         private IEnumerable<Book> GetBooksBase()
         {
-            List<Book> books = new List<Book>();
-            books.AddRange(ReadingStatDataAccess.books);
-            //books.AddRange(ReadingStatDataAccess.books);
-            //books.AddRange(ReadingStatDataAccess.books);
-            //books.AddRange(ReadingStatDataAccess.books);
-            //books.AddRange(ReadingStatDataAccess.books);
-
-            return books.OrderByDescending(b => b.StartDate);
+            return this.dbContext.Books.OrderByDescending(b => b.StartDate);
         }
 
         public void RemoveBook(Book book)
         {
-            ReadingStatDataAccess.books.Remove(book);
+            this.dbContext.Books.Remove(book);
+            this.dbContext.SaveChanges();
         }
 
         public void UpdateBook(Book book)
         {
-            //save changes
+            this.dbContext.SaveChanges();
         }
 
         public void AddBook(Book book)
         {
-            ReadingStatDataAccess.books.Add(book);
+            this.dbContext.Books.Add(book);
+            this.dbContext.SaveChanges();
         }
     }
 }
