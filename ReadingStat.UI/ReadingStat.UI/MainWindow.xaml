@@ -25,6 +25,7 @@
                         <Button Margin="5,0,5,0" Command="{Binding AddBookCommand}">Hinzufügen</Button>
                         <Button Margin="5,0,5,0" Command="{Binding EditBookCommand}">Bearbeiten</Button>
                         <Button Margin="5,0,5,0" Command="{Binding RemoveBookCommand}">Löschen</Button>
+                        <Button Margin="5,0,5,0" Command="{Binding ExportCommand}">Exportieren</Button>
                     </StackPanel>
                     <DataGrid ItemsSource="{Binding Books}" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" IsReadOnly="True" >
                         <DataGrid.RowStyle>

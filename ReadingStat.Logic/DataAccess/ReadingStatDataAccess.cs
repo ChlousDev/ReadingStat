@@ -3,6 +3,7 @@ using ReadingStat.Logic.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Linq;
@@ -19,7 +20,6 @@ namespace ReadingStat.Logic.DataAccess
         public ReadingStatDataAccess()
         {
             dbContext = new ReadingStatisticsContext(ReadingStatDataAccess.Password);
-            this.dbContext.Books.ToList();
         }
 
         public List<Book> GetBooks(int page, int pageSize)
@@ -56,12 +56,15 @@ namespace ReadingStat.Logic.DataAccess
 
         public void RemoveBook(Book book)
         {
+            this.dbContext.Books.Attach(book);
             this.dbContext.Books.Remove(book);
             this.dbContext.SaveChanges();
         }
 
         public void UpdateBook(Book book)
         {
+            this.dbContext.Books.Attach(book);
+            this.dbContext.Entry(book).State = EntityState.Modified;
             this.dbContext.SaveChanges();
         }
 
@@ -69,6 +72,12 @@ namespace ReadingStat.Logic.DataAccess
         {
             this.dbContext.Books.Add(book);
             this.dbContext.SaveChanges();
+        }
+
+        public void Export(string destinationPath)
+        {
+            string destinationConnectionString = $"Data Source=|DataDirectory|{destinationPath}";
+            this.dbContext.Export(destinationConnectionString);
         }
     }
 }

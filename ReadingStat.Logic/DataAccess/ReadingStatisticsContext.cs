@@ -33,6 +33,18 @@ namespace ReadingStat.Logic.DataAccess
             }
         }
 
+        public void Export(string destingationConnectionString)
+        {
+            if (this.Database.Connection is SQLiteConnection)
+            {
+                SQLiteConnection connection = (SQLiteConnection)this.Database.Connection;
+                SQLiteConnection destination = new SQLiteConnection(destingationConnectionString);
+                destination.Open();
+                connection.BackupDatabase(destination, "main", "main", -1, null, -1);
+                destination.Close();
+            }
+        }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

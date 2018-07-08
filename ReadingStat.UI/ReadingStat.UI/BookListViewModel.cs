@@ -1,4 +1,5 @@
-﻿using Mvvm.Commands;
+﻿using Microsoft.Win32;
+using Mvvm.Commands;
 using ReadingStat.Logic.DataAccess;
 using ReadingStat.Logic.Model;
 using System;
@@ -30,6 +31,7 @@ namespace ReadingStat.UI
         public DelegateCommand RemoveBookCommand { get; private set; }
         public DelegateCommand AddBookCommand { get; private set; }
         public DelegateCommand EditBookCommand { get; private set; }
+        public DelegateCommand ExportCommand { get; private set; }
 
         public BookListViewModel()
         {
@@ -42,6 +44,7 @@ namespace ReadingStat.UI
             this.AddBookCommand = new DelegateCommand(() => this.AddBook());
             this.EditBookCommand = new DelegateCommand(() => this.EditBook());
             this.RemoveBookCommand = new DelegateCommand(() => this.RemoveBook());
+            this.ExportCommand = new DelegateCommand(() => this.Export());
 
             this.Load(this.currentPage);
         }
@@ -100,6 +103,17 @@ namespace ReadingStat.UI
                 dataAccess.RemoveBook(book);
             }
             this.Load(this.currentPage);
+        }
+
+        private void Export()
+        {
+            SaveFileDialog fileDialog = new SaveFileDialog();
+            fileDialog.Filter = "Datenbank | *.db";
+           if(fileDialog.ShowDialog() == true)
+            {
+                ReadingStatDataAccess dataAccess = new ReadingStatDataAccess();
+                dataAccess.Export(fileDialog.FileName);
+            }
         }
 
         #region Property Changed
